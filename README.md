@@ -10,3 +10,7 @@ Updated the wallpaper using the top image from reddit in ubuntu.
 2. Specifiy folder path
 
 `lein run "Pictures/reddit-wallpapers"`
+
+## TODO:
+- [ ] Clean previous image after downloading new image.
+- [ ] Change the wallpaper when logged in. 
