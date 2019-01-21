@@ -22,9 +22,8 @@
    Check for the folder and then creates one if not present.
    Return the folder path
   "
-  []
-  (let [folder "Pictures/reddit-wallpapers"
-        exists? (fo/folder-exists folder)
+  [folder]
+  (let [ exists? (fo/folder-exists folder)
         folder-path (fo/get-directory folder)]
     (if (not exists?)
       (do
@@ -34,18 +33,28 @@
 
 (defn get-image-and-set-background
   "Fetches the image from the url and sets the background"
-  []
+  [folder]
   (let [dom (get-dom)
         table-data (html/select dom [:div.sitetable])
         img-url (get-in (first (:content (first table-data))) [:attrs :data-url])
         file-extension (get-file-extension img-url)
         file-name (fo/get-file-name file-extension)
-        folder-path (check-and-create-directory)
-        full-path (fo/get-file-full-path folder-path file-name)]
+        verified-folder-path (check-and-create-directory folder)
+        full-path (fo/get-file-full-path verified-folder-path file-name)]
     (fo/save-image-to-file img-url full-path)
     (fo/set-background full-path)))
+
+(defn set-background
+  "Set image background"
+  ([folder]
+   (get-image-and-set-background folder))
+  ([]
+   (let [folder "Pictures/reddit-wallpapers"]
+     (get-image-and-set-background folder))))
 
 (defn -main
   "Set wallpaper"
   [& args]
-  (get-image-and-set-background))
+  (if (> (count args) 0)
+  (set-background (first args))
+  (set-background)))
