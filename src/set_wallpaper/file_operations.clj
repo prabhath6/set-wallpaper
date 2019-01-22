@@ -22,6 +22,11 @@
       (java.io.File.)
       (.mkdir)))
 
+(defn remove-existing-files
+  "Remove previous files."
+  [dir-name]
+  (doall (map #(. % delete) (. (java.io.File. dir-name) listFiles))))
+
 (defn get-file-name
   "Creates file name based on current time."
   [file-extension]

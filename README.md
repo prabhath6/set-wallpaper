@@ -12,5 +12,5 @@ Updated the wallpaper using the top image from reddit in ubuntu.
 `lein run "Pictures/reddit-wallpapers"`
 
 ## TODO:
-- [ ] Clean previous image after downloading new image.
+- [X] Clean previous image after downloading new image.
 - [ ] Change the wallpaper when logged in. 
