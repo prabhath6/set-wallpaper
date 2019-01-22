@@ -41,6 +41,7 @@
         file-name (fo/get-file-name file-extension)
         verified-folder-path (check-and-create-directory folder)
         full-path (fo/get-file-full-path verified-folder-path file-name)]
+    (fo/remove-existing-files verified-folder-path)
     (fo/save-image-to-file img-url full-path)
     (fo/set-background full-path)))
 
